@@ -8,8 +8,7 @@ const Person = function (firstName, birthYear) {
   // instance methods
   // dont do this
   //   this.calcAge = function () {
-  //     const currentYear = new Date().getFullYear();
-  //     return currentYear - birthYear;
+  //     return new Date().getFullYear() - this.birthYear;
   //   };
 };
 
@@ -29,3 +28,27 @@ console.log(alexandre instanceof Person);
 
 const giulia = { firstName: 'giulia', birthYear: '2000' };
 console.log(giulia instanceof Person);
+
+// PROTOTYPES
+Person.prototype.calcAge = function () {
+  return new Date().getFullYear() - this.birthYear;
+};
+console.log(Person.prototype);
+
+console.log(alexandre.calcAge());
+console.log(elizabete.calcAge());
+console.log(gabriel.calcAge());
+
+console.log(alexandre.__proto__);
+console.log(alexandre.__proto__ === Person.prototype);
+console.log(Person.prototype.isPrototypeOf(alexandre));
+console.log(Person.prototype.isPrototypeOf(elizabete));
+console.log(Person.prototype.isPrototypeOf(Person));
+
+Person.prototype.species = 'Homo Sapiens';
+
+console.log(alexandre);
+console.log(alexandre.species);
+
+console.log(alexandre.hasOwnProperty('firstName'));
+console.log(alexandre.hasOwnProperty('species'));
