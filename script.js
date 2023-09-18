@@ -52,3 +52,27 @@ console.log(alexandre.species);
 
 console.log(alexandre.hasOwnProperty('firstName'));
 console.log(alexandre.hasOwnProperty('species'));
+
+// PROTOTYPAL INHERITANCE ON BUILT-IN OBJECTS
+console.log(alexandre.__proto__);
+console.log(alexandre.__proto__.__proto__);
+console.log(alexandre.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [1, 2, 3, 4, 5, 1, 2, 6, 3, 4, 5, 6, 7];
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+console.log(arr.__proto__.__proto__);
+console.log(arr.__proto__.__proto__.__proto__);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir(h1);
+
+console.dir(x => x + 1);
