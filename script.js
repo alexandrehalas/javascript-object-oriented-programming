@@ -126,8 +126,8 @@ mercedes.accelerate();
 // CLASS DECLARATION
 
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   // this method goes automatically to prototype and not
@@ -135,12 +135,24 @@ class PersonCl {
   calcAge() {
     return new Date().getFullYear() - this.birthYear;
   }
+
   hello() {
-    console.log(`Hello my name is ${this.firstName}`);
+    console.log(`Hello my name is ${this.fullName}`);
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      console.log(`${name} not a full name`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
   }
 }
 
-const afonso = new PersonCl('Afonso', '1970');
+const afonso = new PersonCl('Afonso Zuzuzu', '1970');
 console.log(afonso);
 console.log(afonso.calcAge());
 console.log(afonso.__proto__ === PersonCl.prototype);
@@ -149,3 +161,24 @@ afonso.hello();
 // 1. Classes are not hoisted (classes cannot be used before it declared)
 // 2. Classes are first-class citizes (can pass and return them from functions)
 // 3. Classes are executed in strict mode
+
+// GETTERS AND SETTERS
+
+const account = {
+  owner: 'Alexandre',
+  movements: [50, 200, 100, 10],
+
+  get latestMovement() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latestMovement(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latestMovement);
+console.log((account.latestMovement = 30));
+console.log(account.movements);
+
+console.log(afonso.fullName);
