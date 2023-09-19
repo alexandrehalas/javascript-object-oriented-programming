@@ -118,3 +118,34 @@ mercedes.brake();
 mercedes.brake();
 mercedes.brake();
 mercedes.accelerate();
+
+// CLASS EXPRESSION
+
+//const PersonCl = class {};
+
+// CLASS DECLARATION
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // this method goes automatically to prototype and not
+  // to the object
+  calcAge() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+  hello() {
+    console.log(`Hello my name is ${this.firstName}`);
+  }
+}
+
+const afonso = new PersonCl('Afonso', '1970');
+console.log(afonso);
+console.log(afonso.calcAge());
+console.log(afonso.__proto__ === PersonCl.prototype);
+afonso.hello();
+
+// 1. Classes are not hoisted (classes cannot be used before it declared)
+// 2. Classes are first-class citizes (can pass and return them from functions)
+// 3. Classes are executed in strict mode
