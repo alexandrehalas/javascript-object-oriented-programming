@@ -29,6 +29,14 @@ console.log(alexandre instanceof Person);
 const giulia = { firstName: 'giulia', birthYear: '2000' };
 console.log(giulia instanceof Person);
 
+// STATIC METHODS not in prototype
+Person.hey = function () {
+  console.log('Hey there :)');
+  console.log(this);
+};
+Person.hey();
+// alexandre.hey(); // not works
+
 // PROTOTYPES
 Person.prototype.calcAge = function () {
   return new Date().getFullYear() - this.birthYear;
@@ -130,6 +138,9 @@ class PersonCl {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
+
+  // instance methods
+
   // this method goes automatically to prototype and not
   // to the object
   calcAge() {
@@ -149,6 +160,13 @@ class PersonCl {
   }
   get fullName() {
     return this._fullName;
+  }
+
+  // Static methods
+
+  static hey() {
+    console.log('Hey there :)');
+    console.log(this);
   }
 }
 
@@ -182,3 +200,5 @@ console.log((account.latestMovement = 30));
 console.log(account.movements);
 
 console.log(afonso.fullName);
+
+PersonCl.hey();
