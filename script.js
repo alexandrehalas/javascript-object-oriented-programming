@@ -342,6 +342,7 @@ DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
 
 GOOD LUCK 😀
 */
+/*
 console.log('START - CODE CHALLENGE 3');
 console.log('');
 const Car = function (make, speed) {
@@ -398,3 +399,52 @@ tesla.brake();
 
 console.log('');
 console.log('FINISH - CODE CHALLENGE 3');
+*/
+
+// INHERITANCE BETWEEN "CLASSES": ES6
+
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  }
+  hello() {
+    console.log(`Hello my name is ${this.fullName}`);
+  }
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      console.log(`${name} not a full name`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
+  }
+  static hey() {
+    console.log('Hey there :)');
+    console.log(this);
+  }
+}
+
+class Student extends Person {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear);
+    this.course = course;
+  }
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+  calcAge() {
+    console.log(`I'm ${new Date().getFullYear() - this.birthYear} years old`);
+  }
+}
+
+const david = new Student('David Jones', '1532', 'Piracy');
+david.introduce();
+david.calcAge();
+
+console.log(david);
