@@ -1,6 +1,7 @@
 'use strict';
 
 // CONSTRUCTOR FUNCTIONS AND THE NEW OPERATOR
+/*
 const Person = function (firstName, birthYear) {
   // instance properties
   this.firstName = firstName;
@@ -28,16 +29,18 @@ console.log(alexandre instanceof Person);
 
 const giulia = { firstName: 'giulia', birthYear: '2000' };
 console.log(giulia instanceof Person);
-
+*/
 // STATIC METHODS not in prototype
+/*
 Person.hey = function () {
   console.log('Hey there :)');
   console.log(this);
 };
 Person.hey();
 // alexandre.hey(); // not works
-
+*/
 // PROTOTYPES
+/*
 Person.prototype.calcAge = function () {
   return new Date().getFullYear() - this.birthYear;
 };
@@ -60,8 +63,9 @@ console.log(alexandre.species);
 
 console.log(alexandre.hasOwnProperty('firstName'));
 console.log(alexandre.hasOwnProperty('species'));
-
+*/
 // PROTOTYPAL INHERITANCE ON BUILT-IN OBJECTS
+/*
 console.log(alexandre.__proto__);
 console.log(alexandre.__proto__.__proto__);
 console.log(alexandre.__proto__.__proto__.__proto__);
@@ -85,7 +89,7 @@ console.log(arr.unique());
 // console.dir(h1);
 
 console.dir(x => x + 1);
-
+*/
 ///////////////////////////////////////
 // Coding Challenge #1
 
@@ -100,6 +104,7 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 
 GOOD LUCK 😀
 */
+/*
 console.log('START - CODE CHALLENGE 1');
 const Car = function (make, speed) {
   this.make = make;
@@ -130,13 +135,13 @@ mercedes.brake();
 mercedes.accelerate();
 
 console.log('FINISH - CODE CHALLENGE 1');
-
+*/
 // CLASS EXPRESSION
 
 //const PersonCl = class {};
 
 // CLASS DECLARATION
-
+/*
 class PersonCl {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -206,9 +211,9 @@ console.log(account.movements);
 console.log(afonso.fullName);
 
 PersonCl.hey();
-
+*/
 // OBJECT.CREATE
-
+/*
 const PersonProto = {
   calcAge() {
     return new Date().getFullYear() - this.birthYear;
@@ -230,7 +235,7 @@ const bibi = Object.create(PersonProto);
 bibi.init('Bibi', '1994');
 console.log(bibi);
 console.log(bibi.calcAge());
-
+*/
 ///////////////////////////////////////
 // Coding Challenge #2
 
@@ -244,7 +249,7 @@ DATA CAR 1: 'Ford' going at 120 km/h
 
 GOOD LUCK 😀
 */
-
+/*
 console.log('START - CODE CHALLENGE 2');
 
 class CarCl {
@@ -283,3 +288,41 @@ console.log(ford);
 ford.accelerate();
 
 console.log('FINISH - CODE CHALLENGE 2');
+*/
+
+// INHERITANCE BETWEEN CLASSES USING CONSTRUCTOR FUNCTIONS
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+console.log('JUAN');
+const juan = new Student('Juan', '2000', 'Computer Science');
+juan.introduce();
+juan.calcAge();
+
+console.log(juan.__proto__);
+console.log(juan.__proto__.__proto__);
+
+console.log(juan instanceof Student);
+console.log(juan instanceof Person);
+console.log(juan instanceof Object);
+
+console.dir(Student.prototype.constructor);
