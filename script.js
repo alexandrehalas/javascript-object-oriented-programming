@@ -202,3 +202,27 @@ console.log(account.movements);
 console.log(afonso.fullName);
 
 PersonCl.hey();
+
+// OBJECT.CREATE
+
+const PersonProto = {
+  calcAge() {
+    return new Date().getFullYear() - this.birthYear;
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const josiane = Object.create(PersonProto);
+josiane.firstName = 'Josiane';
+josiane.birthYear = '1970';
+console.log(josiane);
+console.log(josiane.calcAge());
+
+const bibi = Object.create(PersonProto);
+bibi.init('Bibi', '1994');
+console.log(bibi);
+console.log(bibi.calcAge());
