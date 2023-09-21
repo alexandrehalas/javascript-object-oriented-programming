@@ -402,7 +402,7 @@ console.log('FINISH - CODE CHALLENGE 3');
 */
 
 // INHERITANCE BETWEEN "CLASSES": ES6
-
+/*
 class Person {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -448,3 +448,37 @@ david.introduce();
 david.calcAge();
 
 console.log(david);
+*/
+
+// INHERITANCE BETWEEN "CLASSES": OBJECT.CREATE
+
+const PersonProto = {
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const josiane = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const studentJay = Object.create(StudentProto);
+studentJay.init('Jay', '1998', 'Computer Science');
+
+console.log(studentJay);
+studentJay.introduce();
+studentJay.calcAge();
